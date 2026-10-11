@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Valvoula!</title>
+<style>
+:root{--bg1:#ffe3ec;--bg2:#ffd6a5;--card:#ffffffd9;--ink:#3a2340;--accent:#ff4f8b;--accent2:#7c4dff;--track:#0000001a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2a1233;--bg2:#4a1d3d;--card:#1f1226d9;--ink:#fbeaf3;--accent:#ff77a8;--accent2:#b39dff;--track:#ffffff22}}
+:root[data-theme="dark"]{--bg1:#2a1233;--bg2:#4a1d3d;--card:#1f1226d9;--ink:#fbeaf3;--accent:#ff77a8;--accent2:#b39dff;--track:#ffffff22}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);
+background:linear-gradient(135deg,var(--bg1),var(--bg2));display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
+.balloons{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.b{position:absolute;bottom:-120px;width:46px;height:58px;border-radius:50% 50% 48% 48%;opacity:.85;animation:rise linear infinite}
+.b::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:40px;background:currentColor;opacity:.4}
+@keyframes rise{to{transform:translateY(-120vh) rotate(8deg)}}
+.card{position:relative;z-index:2;width:100%;max-width:520px;background:var(--card);backdrop-filter:blur(8px);border-radius:28px;padding:34px 26px;text-align:center;box-shadow:0 20px 60px #0003}
+.page{display:none;animation:pop .45s ease}
+.page.on{display:block}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:none}}
+.emoji{font-size:64px;animation:bounce 1.6s ease-in-out infinite;display:inline-block}
+@keyframes bounce{50%{transform:translateY(-12px) rotate(-6deg)}}
+h1{margin:10px 0 6px;font-size:clamp(26px,8vw,40px);line-height:1.12;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{margin:8px 0;font-size:clamp(22px,6vw,28px)}
+.sub{margin:0 0 22px;opacity:.8;line-height:1.5}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:14px 26px;color:#fff;cursor:pointer;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 8px 20px #ff4f8b55;transition:transform .15s}
+button:hover{transform:scale(1.06)}button:active{transform:scale(.96)}
+button[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.track{height:16px;border-radius:99px;background:var(--track);overflow:hidden;margin:14px 0 8px}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px}
+.status{min-height:24px;font-size:15px;opacity:.85;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 20px;font-size:14px}
+.chips span{background:var(--track);border-radius:99px;padding:6px 12px}
+.rx{text-align:left;background:var(--track);border-left:5px solid var(--accent);border-radius:14px;padding:14px 16px;margin:14px 0 20px;line-height:1.5;font-size:15px}
+.rx div{margin:5px 0}
+.keys{display:flex;gap:5px;justify-content:center;margin:16px 0 10px}
+.keys button{flex:1;max-width:48px;height:120px;padding:0;border-radius:0 0 10px 10px;background:#fff;color:#3a2340;box-shadow:0 4px 0 #bbb,0 6px 12px #0002;font-size:12px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.keys button:hover{transform:none}.keys button:active,.keys button.hit{transform:translateY(4px);background:#ffd6e7;box-shadow:0 0 0 #bbb}
+.arena{position:relative;height:120px;margin-top:6px}
+.arena button{position:absolute;top:30px}
+#yes{left:calc(50% - 125px)}
+#no{left:calc(50% + 15px);background:#8884;color:var(--ink);box-shadow:none;transition:left .2s,top .2s}
+#msg h1{margin-top:0}
+#text{white-space:pre-wrap;line-height:1.65;font-size:17px;min-height:200px;text-align:left}
+.caret{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.again{display:none;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="balloons" id="balloons"></div>
+<canvas id="c"></canvas>
+<main class="card">
+
+  <!-- Page 0 -->
+  <section class="page on" id="p0">
+    <div class="emoji">🐱🚫</div>
+    <h2>Important notice, Valvoula</h2>
+    <p class="sub">Before you open anything: this page contains <b>ZERO cats</b>. No cat pictures and no cat sounds, Don't worry 😂. I checked three times. You are safe here.</p>
+    <button data-go="1">Okay... Let's gooooo 😤</button>
+  </section>
+
+  <!-- Page 1 -->
+  <section class="page" id="p1">
+    <div class="emoji">💊</div>
+    <h2>Prescription for Dr. Valvoula</h2>
+    <div class="rx">
+      <div><b>Patient:</b> Valvoula, freshly upgraded to level 19 🎂 🎂</div>
+      <div><b>Diagnosis:</b> Chronic University Exposure. Patient has spent an alarming number of hours at university and may soon qualify for permanent residency. 😂</div>
+      <div><b>Dose:</b> One birthday celebration, three slices of cake, and absolutely no academic responsibilities today.</div>
+      <div><b>Warning</b> Do not allow the patient to spend her birthday studying. If found near university premises, redirect gently toward the cake.</div>
+      <div><b>Note</b> You might as well bring Koki back to her.😭</div>
+    </div>
+    <button data-go="2">Fill the prescription 💊</button>
+  </section>
+
+  <!-- Page 2 -->
+  <section class="page" id="p2">
+    <div class="emoji">🎹</div>
+    <h2>Your concert is about to begin</h2>
+    <p class="sub">Pharmacist by day, pianist by night. Play any 5 keys to continue.</p>
+    <div class="keys" id="keys"></div>
+    <div class="status" id="s2">Waiting for the maestro...</div>
+    <button id="b2" data-go="3" disabled>Take a bow 🙇‍♀️</button>
+  </section>
+
+  <!-- Page 3 -->
+  <section class="page" id="p3">
+    <div class="emoji">🎁</div>
+    <h2>Do you want your gift?</h2>
+    <p class="sub">Think carefully. This is a very serious question.</p>
+    <div class="arena">
+      <button id="yes">YES!! 🤩</button>
+      <button id="no">No 🙄</button>
+    </div>
+    <div class="status" id="s3"></div>
+  </section>
+
+  <!-- Message -->
+  <section class="page" id="msg">
+    <h1>Happy Birthday, Valvoula! 🎉</h1>
+    <div id="text"></div><span class="caret" id="caret"></span>
+    <div class="again" id="again"><button id="more">More confetti 🎊</button></div>
+  </section>
+
+</main>
+<script>
+(function(){
+var message = [
+"Dear Valvoula,",
+"",
+"It's your NINETEENTH BIRTHDAYYYY, Happy birthday to the most beautiful girl born on this planet.🥳",
+"",
+"I wanted to make you something special this year and as you know I never get off of my laptop. Sooooo I thought about making you a little gift to make your day happier and funnier, was just missing with youuu earlier about the cats 😂. We have been friends since school. That is so long that the friendship should be paying taxes by now 😂. You are officially the longest friend I have ever had and I am so grateful for it.",
+"",
+"Thank you for the laughs, for being there, and for being the kind of friend who makes everything feel easier. Some people come and go. You stayed.💗",
+"",
+"I hope this year brings you everything good: great news, great food, great moments and endless laughs.",
+"",
+"Happy Birthday, my babyyyy. Eat the cake. Eat my slice too. You earned it. 🍰",
+"",
+"With love (and a lot of confetti) 😍,",
+"Sincerely, \nMireille💛\n\nPress the button for more confetti let's celebrateeee!!!"
+].join("\n");
+
+var $=function(id){return document.getElementById(id)};
+var cols=["#ff4f8b","#7c4dff","#ffb703","#06d6a0","#4cc9f0","#f72585"];
+
+/* balloons */
+var bl=$("balloons");
+for(var i=0;i<14;i++){var b=document.createElement("div");b.className="b";var c=cols[i%cols.length];
+b.style.background=c;b.style.color=c;b.style.left=(Math.random()*95)+"%";
+b.style.animationDuration=(9+Math.random()*9)+"s";b.style.animationDelay=(-Math.random()*14)+"s";bl.appendChild(b)}
+
+/* confetti */
+var cv=$("c"),ctx=cv.getContext("2d"),parts=[],running=false;
+function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener("resize",size);
+function burst(n){for(var i=0;i<n;i++){parts.push({x:innerWidth/2+(Math.random()-.5)*120,y:innerHeight*.45,
+vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,r:Math.random()*6+3,rot:Math.random()*6,vr:(Math.random()-.5)*.4,
+c:cols[Math.floor(Math.random()*cols.length)],life:160+Math.random()*80})}
+if(!running){running=true;requestAnimationFrame(tick)}}
+function tick(){ctx.clearRect(0,0,cv.width,cv.height);
+parts=parts.filter(function(p){return p.life>0&&p.y<cv.height+20});
+parts.forEach(function(p){p.vy+=.28;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.rot+=p.vr;p.life--;
+ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.c;ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);ctx.restore()});
+if(parts.length){requestAnimationFrame(tick)}else{running=false}}
+
+/* page navigation */
+function show(n){
+  var all=document.querySelectorAll(".page");
+  for(var i=0;i<all.length;i++)all[i].classList.remove("on");
+  $(n==="msg"?"msg":"p"+n).classList.add("on");
+  if(n==="msg"){type()}
+}
+
+/* piano */
+var freqs=[261.63,293.66,329.63,349.23,392,440,493.88,523.25],names=["C","D","E","F","G","A","B","C"];
+var pLines=["Hmm, a bold opening 🎵","Interesting... the audience is listening 👀","Beautiful. Beethoven is jealous 🎼","Almost there, the crowd goes wild!","Standing ovation! 👏👏👏"];
+var presses=0,actx=null,kb=$("keys");
+function tone(f){
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    var o=actx.createOscillator(),g=actx.createGain();
+    o.type="triangle";o.frequency.value=f;
+    g.gain.setValueAtTime(.0001,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.35,actx.currentTime+.02);
+    g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+1.2);
+    o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+1.3);
+  }catch(e){}
+}
+freqs.forEach(function(f,i){
+  var k=document.createElement("button");k.textContent=names[i];
+  k.addEventListener("click",function(){
+    tone(f);k.classList.add("hit");setTimeout(function(){k.classList.remove("hit")},150);
+    presses++;$("s2").textContent=pLines[Math.min(presses-1,pLines.length-1)];
+    if(presses===5){$("b2").disabled=false;burst(80)}
+  });
+  kb.appendChild(k);
+});
+document.addEventListener("click",function(e){
+  var g=e.target.getAttribute&&e.target.getAttribute("data-go");
+  if(g!==null&&g!==""&&!e.target.disabled){burst(g==="1"?150:40);show(parseInt(g,10))}
+});
+
+/* page 3: the dodging NO button */
+var no=$("no"),yes=$("yes"),s3=$("s3"),tries=0;
+var taunts=["Nice try 😏","Too slow!","Are you sure about that?","The button is shy 🙈","Just say YES already!","Fine, I'll make it easy..."];
+function dodge(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  tries++;
+  var a=no.parentNode,maxX=a.clientWidth-no.offsetWidth,maxY=a.clientHeight-no.offsetHeight;
+  no.style.left=Math.round(Math.random()*maxX)+"px";
+  no.style.top=Math.round(Math.random()*maxY)+"px";
+  s3.textContent=taunts[Math.min(tries-1,taunts.length-1)];
+  if(tries>=6){no.textContent="Yes 🥰";no.onclick=function(){burst(150);show("msg")};no.removeEventListener("pointerenter",dodge);no.removeEventListener("touchstart",dodge)}
+}
+no.addEventListener("pointerenter",dodge);
+no.addEventListener("touchstart",dodge,{passive:false});
+yes.addEventListener("click",function(){burst(250);setTimeout(function(){burst(120)},600);show("msg")});
+
+/* typewriter */
+function type(){
+  var t=$("text"),caret=$("caret"),again=$("again"),i=0;t.textContent="";
+  (function step(){
+    if(i<message.length){t.textContent+=message.charAt(i++);
+      setTimeout(step,/[.!?]/.test(message.charAt(i-1))?160:24)}
+    else{caret.style.display="none";again.style.display="block";burst(160)}
+  })();
+}
+$("more").addEventListener("click",function(){burst(200)});
+})();
+</script>
+</body>
+</html>
